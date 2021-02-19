@@ -244,6 +244,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158642972}
   m_CullTransparentMesh: 1
+--- !u!1 &228914522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+  m_PrefabInstance: {fileID: 1291649852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &228914523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228914522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9df63e3d8a295c4fb10c7488bda82b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _countText: {fileID: 0}
+  _winText: {fileID: 0}
+  _actionButton:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  _grabButton:
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
+  _throwable: {fileID: 0}
 --- !u!1 &338479454
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +836,7 @@ GameObject:
   - component: {fileID: 1462533190}
   - component: {fileID: 1462533189}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -944,6 +970,7 @@ GameObject:
   - component: {fileID: 1781146461}
   - component: {fileID: 1781146460}
   - component: {fileID: 1781146459}
+  - component: {fileID: 1781146462}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -1053,6 +1080,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781146457}
   m_CullTransparentMesh: 1
+--- !u!114 &1781146462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781146457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a28a13d09a7e746a7dfba24fb3858f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842203441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1281,7 @@ GameObject:
   - component: {fileID: 2121868608}
   - component: {fileID: 2121868607}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1256,7 +1295,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121868605}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.65}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 1462533188}
