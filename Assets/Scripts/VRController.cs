@@ -8,20 +8,11 @@ namespace Valve.VR.InteractionSystem
     public class VRController : MonoBehaviour
     {
         private Hand[] _hands;
-        [SerializeField] private Text _countText;
-        [SerializeField] private Text _winText;
-        [SerializeField] private SteamVR_Action_Boolean _actionButton = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabGrip");
-        [SerializeField] private SteamVR_Action_Boolean _grabButton = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("GrabPinch");
+        [SerializeField] private SteamVR_Action_Boolean _menuButton = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
         [SerializeField] private GameObject _throwable;
-
-        private int _count = 0;
-        private int _pickupCount = 0;
 
         void Start()
         {
-            _pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
-            SetCountText();
-            _winText.text = "";
             _hands = GetComponentsInChildren<Hand>();
         }
 
@@ -29,25 +20,23 @@ namespace Valve.VR.InteractionSystem
         {
             foreach (var hand in _hands)
             {
-                if (WasButtonReleased(_actionButton, hand) && IsButtonDown(_grabButton, hand))
+                if (WasButtonReleased(_menuButton, hand))
                 {
-                    SpawnAndAttach(hand);
+                    ToggleMenu(hand);
                 }
             }
         }
 
-        public void IncrementCount()
+        private void ToggleMenu(Hand passedInHand)
         {
-            _count++;
-            SetCountText();
+            
+            // toggle the menu to either show or not show
         }
 
-        private void SetCountText()
+        private void QuitGame()
         {
-            _countText.text = $"Count: {_count}";
-            if (_count >= _pickupCount)
-            {
-                _winText.text = "You Win!";
+            if (something) {
+                Application.Quit();
             }
         }
 
@@ -63,9 +52,6 @@ namespace Valve.VR.InteractionSystem
             {
                 return;
             }
-
-            GameObject prefabObject = Instantiate(_throwable) as GameObject;
-            handToUse.AttachObject(prefabObject, GrabTypes.Pinch);
         }
 
         private bool WasButtonReleased(SteamVR_Action_Boolean button, Hand hand)
