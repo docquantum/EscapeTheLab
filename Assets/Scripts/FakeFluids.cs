@@ -17,6 +17,7 @@ public class FakeFluids : MonoBehaviour
     // DEBUG VARS
     private GameObject d_point;
     private Material d_mat;
+    private float d_rad;
 
     // Start is called before the first frame update
     void Start()
