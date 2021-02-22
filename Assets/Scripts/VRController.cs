@@ -7,9 +7,9 @@ namespace Valve.VR.InteractionSystem
 {
     public class VRController : MonoBehaviour
     {
+        public GameObject menu;
         private Hand[] _hands;
         [SerializeField] private SteamVR_Action_Boolean _menuButton = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
-        [SerializeField] private GameObject _throwable;
 
         void Start()
         {
@@ -20,27 +20,34 @@ namespace Valve.VR.InteractionSystem
         {
             foreach (var hand in _hands)
             {
-                if (WasButtonReleased(_menuButton, hand))
+                if (WasButtonReleased(_menuButton, hand) && menu.active == false)
                 {
                     ToggleMenu(hand);
+                } 
+                else if (WasButtonReleased(_menuButton, hand) && menu.active == true)
+                {
+                    ManageMenu(hand);
                 }
             }
         }
 
         private void ToggleMenu(Hand passedInHand)
         {
-            
-            // toggle the menu to either show or not show
+            menu.active = true;
         }
 
-        private void QuitGame()
+        private void ManageMenu(Hand passedInHand)
         {
-            if (something) {
+            if (passedInHand == _hands[0]) {
                 Application.Quit();
+            }
+            else if (passedInHand == _hands[1])
+            {
+                menu.active = false;
             }
         }
 
-        private void SpawnAndAttach(Hand passedInhand)
+        /*private void SpawnAndAttach(Hand passedInhand)
         {
             Hand handToUse = passedInhand;
             if (passedInhand == null)
@@ -52,7 +59,7 @@ namespace Valve.VR.InteractionSystem
             {
                 return;
             }
-        }
+        }*/
 
         private bool WasButtonReleased(SteamVR_Action_Boolean button, Hand hand)
         {

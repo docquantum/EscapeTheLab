@@ -261,15 +261,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9df63e3d8a295c4fb10c7488bda82b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _countText: {fileID: 0}
-  _winText: {fileID: 0}
-  _actionButton:
-    actionPath: /actions/default/in/GrabGrip
+  menu: {fileID: 2121868605}
+  _menuButton:
+    actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  _grabButton:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 0
-  _throwable: {fileID: 0}
 --- !u!1 &338479454
 GameObject:
   m_ObjectHideFlags: 0
