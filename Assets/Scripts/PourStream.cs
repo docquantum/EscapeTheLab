@@ -18,7 +18,8 @@ public class PourStream : MonoBehaviour
 
     private void Start()
     {
-        
+        MoveToPosition(0, transform.position);
+        MoveToPosition(1, transform.position);
     }
 
     /// <summary>
@@ -26,7 +27,7 @@ public class PourStream : MonoBehaviour
     /// </summary>
     public void Begin()
     {
-
+        StartCoroutine(BeginPour());
     }
 
     /// <summary>
@@ -35,7 +36,13 @@ public class PourStream : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BeginPour()
     {
-        yield return null;
+        while(gameObject.activeSelf)
+        {
+            _targetPos = FindEndPoint();
+            MoveToPosition(0, transform.position);
+            MoveToPosition(1, _targetPos);
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -48,12 +55,10 @@ public class PourStream : MonoBehaviour
     private Vector3 FindEndPoint()
     {
         RaycastHit hit;
-        if(Physics.Raycast(_targetPos, -transform.up, out hit))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        return Vector3.zero;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(ray, out hit, 2f);
+        Vector3 endPoint = hit.collider ? hit.point : ray.GetPoint(2f);
+        return endPoint;
     }
 
     /// <summary>
