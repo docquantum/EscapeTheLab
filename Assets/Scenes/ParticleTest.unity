@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 489735779}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 501068015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -482,6 +482,8 @@ MonoBehaviour:
   _pourThreshold: 45
   _origin: {fileID: 501068015}
   _streamPrefab: {fileID: 5238570228697279498, guid: 687fe5b6c1388c34882009636030b3c7, type: 3}
+  _color: {r: 0, g: 0, b: 0, a: 0}
+  _direction: 2
 --- !u!1 &2010247829
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +602,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6589675775696674852, guid: 362e494393574df42846574d7a698dae, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8294882324350628295, guid: 362e494393574df42846574d7a698dae, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -655,6 +661,10 @@ PrefabInstance:
     - target: {fileID: 8671266747109976957, guid: 362e494393574df42846574d7a698dae, type: 3}
       propertyPath: m_Name
       value: testBeaker
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671266747109976957, guid: 362e494393574df42846574d7a698dae, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 362e494393574df42846574d7a698dae, type: 3}

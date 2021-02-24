@@ -5,21 +5,30 @@ using UnityEngine;
 /// <summary>
 /// Draws the line renderer between the origin and the collision entitiy to create a "pouring" effect.
 /// </summary>
-[RequireComponent(typeof(LineRenderer))]
 public class PourStream : MonoBehaviour
 {
     private LineRenderer _lineRenderer = null;
-    [SerializeField] private Vector3 _targetPos = Vector3.zero;
+    private ParticleSystem _particleSystem = null;
+    private Vector3 _targetPos = Vector3.zero;
+
+    private int _ignoredCollidersLayerMask = 0;
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
     {
         MoveToPosition(0, transform.position);
         MoveToPosition(1, transform.position);
+    }
+
+    public void IgnoreCollider(Collider collider)
+    {
+        _ignoredCollidersLayerMask = 1 << collider.gameObject.layer;
+        _ignoredCollidersLayerMask = ~_ignoredCollidersLayerMask;
     }
 
     /// <summary>
@@ -41,6 +50,7 @@ public class PourStream : MonoBehaviour
             _targetPos = FindEndPoint();
             MoveToPosition(0, transform.position);
             MoveToPosition(1, _targetPos);
+            _particleSystem.transform.position = _targetPos;
             yield return null;
         }
     }
@@ -56,7 +66,7 @@ public class PourStream : MonoBehaviour
     {
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
-        Physics.Raycast(ray, out hit, 2f);
+        Physics.Raycast(ray, out hit, 4f, _ignoredCollidersLayerMask);
         Vector3 endPoint = hit.collider ? hit.point : ray.GetPoint(2f);
         return endPoint;
     }
@@ -68,7 +78,7 @@ public class PourStream : MonoBehaviour
     /// <param name="target"></param>
     private void MoveToPosition(int index, Vector3 target)
     {
-
+        _lineRenderer.SetPosition(index, target);
     }
 
 }

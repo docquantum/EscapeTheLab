@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class PourDetector : MonoBehaviour
 {
+    private enum Direction
+    {
+        green,
+        red,
+        blue
+    };
     [SerializeField] private int _pourThreshold = 45;
     [SerializeField] private Transform _origin = null;
     [SerializeField] private GameObject _streamPrefab = null;
+    [SerializeField] private Color _color;
+    [SerializeField] private Direction _direction;
 
     private bool _isPouring = false;
-    private PourStream currentStream = null;
+    private PourStream _currentStream = null;
+    private Collider _objectCollider = null;
+
+    private void Awake()
+    {
+        _objectCollider = GetComponent<Collider>();
+    }
 
     private void Update()
     {
-        bool pourCheck = CalculatePourAngle() < _pourThreshold;
+        bool pourCheck = CalculatePourAngle(_direction) < _pourThreshold;
 
         if(_isPouring != pourCheck)
         {
@@ -29,18 +43,27 @@ public class PourDetector : MonoBehaviour
     private void StartPour()
     {
         print("Start");
-        currentStream = CreateStream();
-        currentStream.Begin();
+        _currentStream = CreateStream();
+        _currentStream.IgnoreCollider(_objectCollider);
+        _currentStream.Begin();
     }
 
     private void EndPour()
     {
         print("end");
+        Destroy(_currentStream.gameObject);
     }
 
-    private float CalculatePourAngle()
+    private float CalculatePourAngle(Direction direction)
     {
-        return transform.up.y * Mathf.Rad2Deg;
+        float val = 0f;
+        if (direction == Direction.red)
+            val = transform.right.y;
+        else if (direction == Direction.blue)
+            val = transform.forward.y;
+        else if (direction == Direction.green)
+            val = transform.up.y;
+        return val * Mathf.Rad2Deg;
     }
 
     private PourStream CreateStream()
