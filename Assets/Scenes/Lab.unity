@@ -6969,6 +6969,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6831988224098068089}
     m_Modifications:
+    - target: {fileID: 2097123627745029069, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
+      propertyPath: _name
+      value: Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097123627745029069, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097123627745029069, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
+      propertyPath: _color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2097123627745029069, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
+      propertyPath: _description
+      value: Blue is a liquid that makes you blue
+      objectReference: {fileID: 0}
     - target: {fileID: 5601590252901618093, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
       propertyPath: m_Name
       value: InteractableTestTube
@@ -7030,6 +7046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Flask
       objectReference: {fileID: 0}
+    - target: {fileID: 232924150194882849, guid: 58e01612b60a5dc45a870217f464ca22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 812563548731793723, guid: 58e01612b60a5dc45a870217f464ca22, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7088,6 +7108,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 290262080}
     m_Modifications:
+    - target: {fileID: 11657117683388903, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _name
+      value: Green
+      objectReference: {fileID: 0}
+    - target: {fileID: 11657117683388903, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11657117683388903, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _description
+      value: IDK man, it's just green
+      objectReference: {fileID: 0}
+    - target: {fileID: 581579427641066876, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _name
+      value: Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 581579427641066876, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 581579427641066876, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 581579427641066876, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _description
+      value: This liquid makes you red hot!
+      objectReference: {fileID: 0}
     - target: {fileID: 4809857887659644281, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7144,7 +7192,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: testTubeHolderMaya
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7364577304341656481, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+    - {fileID: 3539685212159923022, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+    - {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+    - {fileID: 5032090739091408539, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
 --- !u!4 &4993002418077704025 stripped
 Transform:
