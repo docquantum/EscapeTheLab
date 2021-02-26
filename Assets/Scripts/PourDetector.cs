@@ -17,6 +17,9 @@ public class PourDetector : MonoBehaviour
     [SerializeField] private Color _color;
     [SerializeField] private Direction _direction;
     [SerializeField] private string _liquidsTag;
+    [SerializeField] private bool _allowPourOut = false;
+
+    [SerializeField] private GameObject _tempLiquidInContainer = null;
 
     public Color Color
     {
@@ -50,6 +53,8 @@ public class PourDetector : MonoBehaviour
         var liquid = GetComponent<Liquid>();
         if (liquid)
             Color = liquid.Color;
+        if (_tempLiquidInContainer)
+            _tempLiquidInContainer.GetComponent<MeshRenderer>().material.color = liquid.Color;
     }
 
     private void Start()
@@ -62,9 +67,16 @@ public class PourDetector : MonoBehaviour
 
     private void Update()
     {
-        bool pourCheck = CalculatePourAngle(_direction) < _pourThreshold;
+        float angle = CalculatePourAngle(_direction);
+        bool pourCheck = angle < _pourThreshold;
 
-        if(_isPouring != pourCheck)
+        if (angle < -_pourThreshold && _allowPourOut)
+        {
+            SendMessage("ClearLiquids");
+            _currentStream.SetColor(new Color());
+        }
+
+        if (_isPouring != pourCheck)
         {
             _isPouring = pourCheck;
 
