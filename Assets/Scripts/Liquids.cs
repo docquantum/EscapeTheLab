@@ -43,14 +43,6 @@ public class Liquids : MonoBehaviour
         _pourDetector.Color = _mixedColor;
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    // if collision with liquid and another liquid within dict liquids:
-    //    Liquid collidingLiquid = null; // get from collision
-    //    onCollision(liquid, collidingLiquid);
-    //}
-
     private void OnCollisionStream(Collider other)
     {
         executedTime = Time.time;
@@ -65,6 +57,8 @@ public class Liquids : MonoBehaviour
             else if (other.GetComponent<Liquid>())
             {
                 _liquidsSet.Add(other.GetComponent<Liquid>());
+                if (_liquidCount != _liquidsSet.Count)
+                    UpdateColor();
                 computerScreen.text = "Liquid: " + other.GetComponent<Liquid>().Name + "\n\n" + "Description: " + other.GetComponent<Liquid>().Description;
                 showNotifier = true;
             }
