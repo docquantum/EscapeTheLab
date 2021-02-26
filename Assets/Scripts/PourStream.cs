@@ -44,6 +44,12 @@ public class PourStream : MonoBehaviour
     public void SetColor(Color color)
     {
         _color = color;
+        if(_lineRenderer)
+        {
+            _lineRenderer.material.color = _color;
+            var _particleSystemMain = _particleSystem.main;
+            _particleSystemMain.startColor = _color;
+        }
     }
 
     public void SetStreamScale(float scale)

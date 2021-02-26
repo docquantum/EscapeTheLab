@@ -15,6 +15,8 @@ public class Liquids : MonoBehaviour
 
     private HashSet<Liquid> _liquidsSet = new HashSet<Liquid>();
 
+    [SerializeField] private GameObject _LiquidInContainer;
+
     public HashSet<Liquid> LiquidsSet => _liquidsSet;
 
     private int _liquidCount = 0;
@@ -34,6 +36,7 @@ public class Liquids : MonoBehaviour
             _liquidsSet.CopyTo(arr);
             _mixedColor = arr[0].Color;
             _pourDetector.Color = _mixedColor;
+            _LiquidInContainer.GetComponent<MeshRenderer>().material.color = _mixedColor;
             return;
         }
         foreach (var liquid in _liquidsSet)
@@ -41,6 +44,7 @@ public class Liquids : MonoBehaviour
             _mixedColor += liquid.Color;
         }
         _pourDetector.Color = _mixedColor;
+        _LiquidInContainer.GetComponent<MeshRenderer>().material.color = _mixedColor;
     }
 
     private void OnCollisionStream(Collider other)
@@ -63,6 +67,15 @@ public class Liquids : MonoBehaviour
                 showNotifier = true;
             }
         }
+    }
+
+    private void ClearLiquids()
+    {
+        _liquidsSet.Clear();
+        _liquidCount = 0;
+        _mixedColor = new Color();
+        _pourDetector.Color = _mixedColor;
+        _LiquidInContainer.GetComponent<MeshRenderer>().material.color = _mixedColor;
     }
 
     void Update()

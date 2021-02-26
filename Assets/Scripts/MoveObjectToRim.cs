@@ -21,6 +21,8 @@ public class MoveObjectToRim : MonoBehaviour
         float z = -_targetTransform.forward.y;
 
         float c = Mathf.Sqrt(x * x + z * z);
+        if (c == 0f)
+            return;
 
         Vector3 newPos = new Vector3(x / c, _top, z / c);
 
