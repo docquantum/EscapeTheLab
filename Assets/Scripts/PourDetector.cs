@@ -53,6 +53,8 @@ public class PourDetector : MonoBehaviour
     private void StartPour()
     {
         _currentStream = CreateStream();
+        _currentStream.SetColor(_color);
+        _currentStream.SetStreamScale(_streamScale);
         _currentStream.IgnoreCollider(_objectCollider);
         _currentStream.Begin();
     }
@@ -79,8 +81,6 @@ public class PourDetector : MonoBehaviour
     {
         GameObject streamObject = Instantiate(_streamPrefab, _origin.position, Quaternion.identity, _origin);
         PourStream pourStream = streamObject.GetComponent<PourStream>();
-        pourStream.SetColor(_color);
-        pourStream.SetStreamScale(_streamScale);
         return pourStream;
     }
 }
