@@ -20,11 +20,11 @@ namespace Valve.VR.InteractionSystem
         {
             foreach (var hand in _hands)
             {
-                if (WasButtonReleased(_menuButton, hand) && menu.active == false)
+                if (WasButtonReleased(_menuButton, hand) && menu.activeSelf == false)
                 {
                     ToggleMenu(hand);
                 } 
-                else if (WasButtonReleased(_menuButton, hand) && menu.active == true)
+                else if (WasButtonReleased(_menuButton, hand) && menu.activeSelf == true)
                 {
                     ManageMenu(hand);
                 }
@@ -33,7 +33,7 @@ namespace Valve.VR.InteractionSystem
 
         private void ToggleMenu(Hand passedInHand)
         {
-            menu.active = true;
+            menu.SetActive(true);
         }
 
         private void ManageMenu(Hand passedInHand)
@@ -43,7 +43,7 @@ namespace Valve.VR.InteractionSystem
             }
             else if (passedInHand == _hands[1])
             {
-                menu.active = false;
+                menu.SetActive(false);
             }
         }
 
