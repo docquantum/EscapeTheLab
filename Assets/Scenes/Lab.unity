@@ -7014,7 +7014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2010883168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7732,6 +7732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableTestTube
       objectReference: {fileID: 0}
+    - target: {fileID: 5601590252901618093, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
+      propertyPath: m_TagString
+      value: Container
+      objectReference: {fileID: 0}
     - target: {fileID: 7795236179199315786, guid: c8f6e3d33aae9cb498bc52684c79d3c8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -7856,6 +7860,10 @@ PrefabInstance:
       value: Green
       objectReference: {fileID: 0}
     - target: {fileID: 11657117683388903, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11657117683388903, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
       propertyPath: _color.g
       value: 1
       objectReference: {fileID: 0}
@@ -7878,6 +7886,42 @@ PrefabInstance:
     - target: {fileID: 581579427641066876, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
       propertyPath: _description
       value: This liquid makes you red hot!
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _name
+      value: Yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.r
+      value: 0.9056848
+      objectReference: {fileID: 0}
+    - target: {fileID: 745320025638986581, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _description
+      value: this yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545633667726736635, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947182866925901112, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932379654335220161, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4809857887659644281, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
       propertyPath: m_RootOrder
@@ -7935,10 +7979,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: testTubeHolderMaya
       objectReference: {fileID: 0}
+    - target: {fileID: 7041904195042093358, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _name
+      value: purple
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.b
+      value: 0.7407408
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
+      propertyPath: _description
+      value: i got that drank in my cuuuuup
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7364577304341656481, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
     - {fileID: 3539685212159923022, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
-    - {fileID: 8665169018183987032, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
     - {fileID: 5032090739091408539, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd46f8af00cb604aa827fd3b38aef7c, type: 3}
 --- !u!4 &4993002418077704025 stripped
