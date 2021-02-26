@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7894107622946903161}
   - component: {fileID: 2839882598825679381}
   - component: {fileID: 7193694122044962159}
+  - component: {fileID: 4085445604823055898}
   m_Layer: 0
   m_Name: InteractableBeaker
   m_TagString: Untagged
@@ -221,3 +222,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+--- !u!114 &4085445604823055898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087292096794634598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0bae98b99ac2f43a2eae46e2dffa97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pourThreshold: 45
+  _streamPrefab: {fileID: 5238570228697279498, guid: 687fe5b6c1388c34882009636030b3c7, type: 3}
+  _streamScale: 4
+  _color: {r: 1, g: 0, b: 0, a: 1}
+  _direction: 0

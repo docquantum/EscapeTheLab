@@ -12,11 +12,12 @@ public class PourDetector : MonoBehaviour
     };
 
     [SerializeField] private int _pourThreshold = 45;
-    [SerializeField] private Transform _origin = null;
     [SerializeField] private GameObject _streamPrefab = null;
+    [SerializeField] private float _streamScale = 1f;
     [SerializeField] private Color _color;
     [SerializeField] private Direction _direction;
 
+    private Transform _origin = null;
     private bool _isPouring = false;
     private PourStream _currentStream = null;
     private Collider _objectCollider = null;
@@ -24,6 +25,14 @@ public class PourDetector : MonoBehaviour
     private void Awake()
     {
         _objectCollider = GetComponent<Collider>();
+    }
+
+    private void Start()
+    {
+        GameObject obj = new GameObject("Origin");
+        obj.AddComponent<MoveObjectToRim>();
+        _origin = obj.transform;
+        _origin.parent = transform;
     }
 
     private void Update()
@@ -71,6 +80,7 @@ public class PourDetector : MonoBehaviour
         GameObject streamObject = Instantiate(_streamPrefab, _origin.position, Quaternion.identity, _origin);
         PourStream pourStream = streamObject.GetComponent<PourStream>();
         pourStream.SetColor(_color);
+        pourStream.SetStreamScale(_streamScale);
         return pourStream;
     }
 }

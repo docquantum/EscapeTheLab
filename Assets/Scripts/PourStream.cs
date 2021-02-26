@@ -11,18 +11,18 @@ public class PourStream : MonoBehaviour
     private ParticleSystem _particleSystem = null;
     private Vector3 _targetPos = Vector3.zero;
     private Color _color;
+    private float _streamScale = 1f;
+    private float _animationSpeed = 3f;
 
     private int _ignoredCollidersLayerMask = 0;
     private Coroutine _startPourRoutine = null;
     private Coroutine _endPourRoutine = null;
+    private bool _beginAnimationEnded = false;
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        _lineRenderer.material.color = _color;
         _particleSystem = GetComponentInChildren<ParticleSystem>();
-        var _particleSystemMain = _particleSystem.main;
-        _particleSystemMain.startColor = _color;
     }
 
     private void Start()
@@ -42,11 +42,21 @@ public class PourStream : MonoBehaviour
         _color = color;
     }
 
+    public void SetStreamScale(float scale)
+    {
+        _streamScale = scale;
+    }
+
     /// <summary>
     /// Begins the pouring process
     /// </summary>
     public void Begin()
     {
+        _lineRenderer.material.color = _color;
+        _lineRenderer.widthMultiplier *= _streamScale;
+        var _particleSystemMain = _particleSystem.main;
+        _particleSystemMain.startColor = _color;
+        _particleSystemMain.startSizeMultiplier *= _streamScale;
         StartCoroutine(UpdateParticle());
         _startPourRoutine = StartCoroutine(BeginPour());
     }
@@ -61,7 +71,12 @@ public class PourStream : MonoBehaviour
         {
             _targetPos = FindEndPoint();
             MoveToPosition(0, transform.position);
-            MoveToPosition(1, _targetPos);
+            if (HasReachedPosition(1, _targetPos))
+                _beginAnimationEnded = true;
+            if (_beginAnimationEnded)
+                MoveToPosition(1, _targetPos);
+            else
+                AnimateToPosition(1, _targetPos);
             _particleSystem.transform.position = _targetPos;
             yield return null;
         }
@@ -126,14 +141,14 @@ public class PourStream : MonoBehaviour
     private void AnimateToPosition(int index, Vector3 target)
     {
         Vector3 currentPoint = _lineRenderer.GetPosition(index);
-        Vector3 newPosition = Vector3.MoveTowards(currentPoint, _targetPos, Time.deltaTime * 1.75f);
+        Vector3 newPosition = Vector3.MoveTowards(currentPoint, _targetPos, Time.deltaTime * _animationSpeed);
         _lineRenderer.SetPosition(index, newPosition);
     }
 
     private bool HasReachedPosition(int index, Vector3 target)
     {
         Vector3 currentPosition = _lineRenderer.GetPosition(index);
-        return currentPosition == _targetPos;
+        return currentPosition == target;
     }
 
     private IEnumerator UpdateParticle()

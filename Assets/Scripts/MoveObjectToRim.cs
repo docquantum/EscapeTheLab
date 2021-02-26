@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class MoveObjectToRim : MonoBehaviour
 {
-
-    [SerializeField] private MeshRenderer _targetMesh = null;
     private Transform _targetTransform = null;
+    private float _top = 0f;
 
-    private void Awake()
+    private void Start()
     {
-        _targetTransform = _targetMesh.transform;
+        _targetTransform = transform.parent;
+        transform.localPosition = _targetTransform.localPosition;
+        var objectBounds = GetComponentInParent<MeshFilter>().mesh.bounds;
+        _top = objectBounds.center.y + objectBounds.extents.y;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float x = -_targetTransform.right.y;
         float z = -_targetTransform.forward.y;
 
         float c = Mathf.Sqrt(x * x + z * z);
 
-        Vector3 newPos = new Vector3(x / c, 2f, z / c);
+        Vector3 newPos = new Vector3(x / c, _top, z / c);
 
         transform.localPosition = newPos;
     }
