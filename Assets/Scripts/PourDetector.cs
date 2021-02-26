@@ -10,6 +10,7 @@ public class PourDetector : MonoBehaviour
         red,
         blue
     };
+
     [SerializeField] private int _pourThreshold = 45;
     [SerializeField] private Transform _origin = null;
     [SerializeField] private GameObject _streamPrefab = null;
@@ -68,6 +69,8 @@ public class PourDetector : MonoBehaviour
     private PourStream CreateStream()
     {
         GameObject streamObject = Instantiate(_streamPrefab, _origin.position, Quaternion.identity, _origin);
-        return streamObject.GetComponent<PourStream>();
+        PourStream pourStream = streamObject.GetComponent<PourStream>();
+        pourStream.SetColor(_color);
+        return pourStream;
     }
 }

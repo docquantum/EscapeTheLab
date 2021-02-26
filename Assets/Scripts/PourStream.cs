@@ -10,6 +10,7 @@ public class PourStream : MonoBehaviour
     private LineRenderer _lineRenderer = null;
     private ParticleSystem _particleSystem = null;
     private Vector3 _targetPos = Vector3.zero;
+    private Color _color;
 
     private int _ignoredCollidersLayerMask = 0;
     private Coroutine _startPourRoutine = null;
@@ -18,7 +19,10 @@ public class PourStream : MonoBehaviour
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _lineRenderer.material.color = _color;
         _particleSystem = GetComponentInChildren<ParticleSystem>();
+        var _particleSystemMain = _particleSystem.main;
+        _particleSystemMain.startColor = _color;
     }
 
     private void Start()
@@ -31,6 +35,11 @@ public class PourStream : MonoBehaviour
     {
         _ignoredCollidersLayerMask = 1 << collider.gameObject.layer;
         _ignoredCollidersLayerMask = ~_ignoredCollidersLayerMask;
+    }
+
+    public void SetColor(Color color)
+    {
+        _color = color;
     }
 
     /// <summary>
@@ -109,6 +118,11 @@ public class PourStream : MonoBehaviour
         _lineRenderer.SetPosition(index, target);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="target"></param>
     private void AnimateToPosition(int index, Vector3 target)
     {
         Vector3 currentPoint = _lineRenderer.GetPosition(index);
