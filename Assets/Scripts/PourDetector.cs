@@ -42,7 +42,6 @@ public class PourDetector : MonoBehaviour
 
     private void StartPour()
     {
-        print("Start");
         _currentStream = CreateStream();
         _currentStream.IgnoreCollider(_objectCollider);
         _currentStream.Begin();
@@ -50,8 +49,8 @@ public class PourDetector : MonoBehaviour
 
     private void EndPour()
     {
-        print("end");
-        Destroy(_currentStream.gameObject);
+        _currentStream.End();
+        _currentStream = null;
     }
 
     private float CalculatePourAngle(Direction direction)
@@ -68,7 +67,7 @@ public class PourDetector : MonoBehaviour
 
     private PourStream CreateStream()
     {
-        GameObject streamObject = Instantiate(_streamPrefab, _origin.position, Quaternion.identity, transform);
+        GameObject streamObject = Instantiate(_streamPrefab, _origin.position, Quaternion.identity, _origin);
         return streamObject.GetComponent<PourStream>();
     }
 }

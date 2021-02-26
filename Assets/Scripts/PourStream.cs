@@ -12,6 +12,8 @@ public class PourStream : MonoBehaviour
     private Vector3 _targetPos = Vector3.zero;
 
     private int _ignoredCollidersLayerMask = 0;
+    private Coroutine _startPourRoutine = null;
+    private Coroutine _endPourRoutine = null;
 
     private void Awake()
     {
@@ -36,7 +38,8 @@ public class PourStream : MonoBehaviour
     /// </summary>
     public void Begin()
     {
-        StartCoroutine(BeginPour());
+        StartCoroutine(UpdateParticle());
+        _startPourRoutine = StartCoroutine(BeginPour());
     }
 
     /// <summary>
@@ -53,6 +56,31 @@ public class PourStream : MonoBehaviour
             _particleSystem.transform.position = _targetPos;
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// A couroutine which handles the animation for ending the pour and
+    /// stopping the previous coroutine
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator EndPour()
+    {
+        while(!HasReachedPosition(0, _targetPos))
+        {
+            AnimateToPosition(0, _targetPos);
+            AnimateToPosition(1, _targetPos);
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Stops the pouring process
+    /// </summary>
+    public void End()
+    {
+        StopCoroutine(_startPourRoutine);
+        _endPourRoutine = StartCoroutine(EndPour());
     }
 
     /// <summary>
@@ -81,4 +109,26 @@ public class PourStream : MonoBehaviour
         _lineRenderer.SetPosition(index, target);
     }
 
+    private void AnimateToPosition(int index, Vector3 target)
+    {
+        Vector3 currentPoint = _lineRenderer.GetPosition(index);
+        Vector3 newPosition = Vector3.MoveTowards(currentPoint, _targetPos, Time.deltaTime * 1.75f);
+        _lineRenderer.SetPosition(index, newPosition);
+    }
+
+    private bool HasReachedPosition(int index, Vector3 target)
+    {
+        Vector3 currentPosition = _lineRenderer.GetPosition(index);
+        return currentPosition == _targetPos;
+    }
+
+    private IEnumerator UpdateParticle()
+    {
+        while (gameObject.activeSelf)
+        {
+            _particleSystem.gameObject.transform.position = _targetPos;
+            _particleSystem.gameObject.SetActive(HasReachedPosition(1, _targetPos));
+            yield return null;
+        }
+    }
 }
