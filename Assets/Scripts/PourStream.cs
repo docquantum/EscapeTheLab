@@ -5,20 +5,32 @@ using UnityEngine;
 /// <summary>
 /// Draws the line renderer between the origin and the collision entitiy to create a "pouring" effect.
 /// </summary>
-[RequireComponent(typeof(LineRenderer))]
 public class PourStream : MonoBehaviour
 {
     private LineRenderer _lineRenderer = null;
-    [SerializeField] private Vector3 _targetPos = Vector3.zero;
+    private ParticleSystem _particleSystem = null;
+    private Vector3 _targetPos = Vector3.zero;
+
+    private int _ignoredCollidersLayerMask = 0;
+    private Coroutine _startPourRoutine = null;
+    private Coroutine _endPourRoutine = null;
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
     {
-        
+        MoveToPosition(0, transform.position);
+        MoveToPosition(1, transform.position);
+    }
+
+    public void IgnoreCollider(Collider collider)
+    {
+        _ignoredCollidersLayerMask = 1 << collider.gameObject.layer;
+        _ignoredCollidersLayerMask = ~_ignoredCollidersLayerMask;
     }
 
     /// <summary>
@@ -26,7 +38,8 @@ public class PourStream : MonoBehaviour
     /// </summary>
     public void Begin()
     {
-
+        StartCoroutine(UpdateParticle());
+        _startPourRoutine = StartCoroutine(BeginPour());
     }
 
     /// <summary>
@@ -35,7 +48,39 @@ public class PourStream : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BeginPour()
     {
-        yield return null;
+        while(gameObject.activeSelf)
+        {
+            _targetPos = FindEndPoint();
+            MoveToPosition(0, transform.position);
+            MoveToPosition(1, _targetPos);
+            _particleSystem.transform.position = _targetPos;
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// A couroutine which handles the animation for ending the pour and
+    /// stopping the previous coroutine
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator EndPour()
+    {
+        while(!HasReachedPosition(0, _targetPos))
+        {
+            AnimateToPosition(0, _targetPos);
+            AnimateToPosition(1, _targetPos);
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Stops the pouring process
+    /// </summary>
+    public void End()
+    {
+        StopCoroutine(_startPourRoutine);
+        _endPourRoutine = StartCoroutine(EndPour());
     }
 
     /// <summary>
@@ -48,12 +93,10 @@ public class PourStream : MonoBehaviour
     private Vector3 FindEndPoint()
     {
         RaycastHit hit;
-        if(Physics.Raycast(_targetPos, -transform.up, out hit))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(-Vector3.up) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
-        }
-        return Vector3.zero;
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(ray, out hit, 4f, _ignoredCollidersLayerMask);
+        Vector3 endPoint = hit.collider ? hit.point : ray.GetPoint(2f);
+        return endPoint;
     }
 
     /// <summary>
@@ -63,7 +106,29 @@ public class PourStream : MonoBehaviour
     /// <param name="target"></param>
     private void MoveToPosition(int index, Vector3 target)
     {
-
+        _lineRenderer.SetPosition(index, target);
     }
 
+    private void AnimateToPosition(int index, Vector3 target)
+    {
+        Vector3 currentPoint = _lineRenderer.GetPosition(index);
+        Vector3 newPosition = Vector3.MoveTowards(currentPoint, _targetPos, Time.deltaTime * 1.75f);
+        _lineRenderer.SetPosition(index, newPosition);
+    }
+
+    private bool HasReachedPosition(int index, Vector3 target)
+    {
+        Vector3 currentPosition = _lineRenderer.GetPosition(index);
+        return currentPosition == _targetPos;
+    }
+
+    private IEnumerator UpdateParticle()
+    {
+        while (gameObject.activeSelf)
+        {
+            _particleSystem.gameObject.transform.position = _targetPos;
+            _particleSystem.gameObject.SetActive(HasReachedPosition(1, _targetPos));
+            yield return null;
+        }
+    }
 }
