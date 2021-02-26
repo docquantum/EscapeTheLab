@@ -24,7 +24,10 @@ public class Liquids : MonoBehaviour
     {
         if (other.CompareTag(gameObject.tag))
         {
-            _liquidsSet.UnionWith(other.GetComponent<Liquids>().LiquidsSet);
+            if (other.GetComponent<Liquids>())
+                _liquidsSet.UnionWith(other.GetComponent<Liquids>().LiquidsSet);
+            else if (other.GetComponent<Liquid>())
+                _liquidsSet.Add(other.GetComponent<Liquid>());
         }
     }
 }
