@@ -8,7 +8,9 @@ public class Liquids : MonoBehaviour
     public GameObject computerScreen;
     public GameObject notifier;
 
-    private List<Liquid> liquidList = new List<Liquid>();
+    private HashSet<Liquid> _liquidsSet = new HashSet<Liquid>();
+
+    public HashSet<Liquid> LiquidsSet => _liquidsSet;
 
     // Update is called once per frame
     //void Update()
@@ -18,11 +20,11 @@ public class Liquids : MonoBehaviour
     //    onCollision(liquid, collidingLiquid);
     //}
 
-    //private onCollision(liquid1, liquid2)
-    //{
-    //    *//*switch {
-    //        case 1:
-    //            do something;
-    //    }*//*
-    //}*/
+    private void OnCollisionStream(Collider other)
+    {
+        if (other.CompareTag(gameObject.tag))
+        {
+            _liquidsSet.UnionWith(other.GetComponent<Liquids>().LiquidsSet);
+        }
+    }
 }

@@ -19,6 +19,10 @@ public class PourStream : MonoBehaviour
     private Coroutine _endPourRoutine = null;
     private bool _beginAnimationEnded = false;
 
+    private Collider _rayHitCollider = null;
+
+    public Collider RayHitCollider => _rayHitCollider;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
@@ -119,7 +123,13 @@ public class PourStream : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, 4f, _ignoredCollidersLayerMask);
-        Vector3 endPoint = hit.collider ? hit.point : ray.GetPoint(2f);
+        _rayHitCollider = hit.collider;
+        Vector3 endPoint = ray.GetPoint(2f);
+        if (hit.collider)
+        {
+            endPoint = hit.point;
+            SendMessageUpwards("OnCollisionStream", hit.collider);
+        }
         return endPoint;
     }
 

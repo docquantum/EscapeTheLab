@@ -16,11 +16,21 @@ public class PourDetector : MonoBehaviour
     [SerializeField] private float _streamScale = 1f;
     [SerializeField] private Color _color;
     [SerializeField] private Direction _direction;
+    [SerializeField] private string _liquidsTag;
 
     private Transform _origin = null;
     private bool _isPouring = false;
     private PourStream _currentStream = null;
     private Collider _objectCollider = null;
+    public Collider StreamCollider
+    {
+        get
+        {
+            if  (_currentStream.RayHitCollider && _currentStream.RayHitCollider.CompareTag(_liquidsTag))
+                return _currentStream.RayHitCollider;
+            return null;
+        }
+    }
 
     private void Awake()
     {
