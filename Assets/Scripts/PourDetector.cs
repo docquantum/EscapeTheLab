@@ -18,6 +18,18 @@ public class PourDetector : MonoBehaviour
     [SerializeField] private Direction _direction;
     [SerializeField] private string _liquidsTag;
 
+    public Color Color
+    {
+        get
+        {
+            return _color;
+        }
+        set
+        {
+            _color = value;
+        }
+    }
+
     private Transform _origin = null;
     private bool _isPouring = false;
     private PourStream _currentStream = null;
@@ -35,6 +47,9 @@ public class PourDetector : MonoBehaviour
     private void Awake()
     {
         _objectCollider = GetComponent<Collider>();
+        var liquid = GetComponent<Liquid>();
+        if (liquid)
+            Color = liquid.Color;
     }
 
     private void Start()

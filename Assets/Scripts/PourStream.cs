@@ -128,7 +128,7 @@ public class PourStream : MonoBehaviour
         if (hit.collider)
         {
             endPoint = hit.point;
-            SendMessageUpwards("OnCollisionStream", hit.collider);
+            hit.transform.SendMessageUpwards("OnCollisionStream", GetComponentInParent<Collider>(), SendMessageOptions.DontRequireReceiver);
         }
         return endPoint;
     }
