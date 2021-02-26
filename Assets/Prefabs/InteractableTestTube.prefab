@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 139064130775874242}
   - component: {fileID: 2960663879703994094}
   - component: {fileID: 2097123627745029069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: InteractableTestTube
-  m_TagString: Untagged
+  m_TagString: Container
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 9153201021073504215}
   - component: {fileID: 2819437099894906346}
   - component: {fileID: 9158501526818812454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
