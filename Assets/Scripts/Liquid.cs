@@ -27,10 +27,10 @@ public class Liquid : MonoBehaviour
         set { _description = value; } 
     }
 
-    Liquid(string name, Color color, string descrition)
+    Liquid(string name, Color color, string description)
     {
         Name = name;
         Color = color;
-        Description = descrition;
+        Description = description;
     }
 }
