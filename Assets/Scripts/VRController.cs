@@ -29,6 +29,9 @@ namespace Valve.VR.InteractionSystem
                     ManageMenu(hand);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                Application.Quit();
         }
 
         private void ToggleMenu(Hand passedInHand)

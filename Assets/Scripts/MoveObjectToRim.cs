@@ -17,10 +17,11 @@ public class MoveObjectToRim : MonoBehaviour
 
     void FixedUpdate()
     {
-        float x = -_targetTransform.right.y;
-        float z = -_targetTransform.forward.y;
+        float x = _targetTransform.right.y;
+        float z = _targetTransform.forward.y;
 
-        float c = Mathf.Sqrt(x * x + z * z);
+        //float c = Mathf.Sqrt(x * x + z * z);
+        float c = 1 - _top;
         if (c == 0f)
             return;
 
